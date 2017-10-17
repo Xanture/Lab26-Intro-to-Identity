@@ -30,7 +30,7 @@ namespace lab26_brian
             services.AddDbContext<ApplicationDbContext>(option =>
                 option.UseSqlServer(Configuration.GetConnectionString("lab26_brianContext")));
 
-            services.AddIdentity<ApplicationUser, IdentityUser>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
         }
