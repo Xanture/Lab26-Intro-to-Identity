@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using lab26_brian.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using lab26_brian.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace lab26_brian
 {
@@ -24,6 +26,13 @@ namespace lab26_brian
 
             services.AddDbContext<lab26_brianContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("lab26_brianContext")));
+
+            services.AddDbContext<ApplicationDbContext>(option =>
+                option.UseSqlServer(Configuration.GetConnectionString("lab26_brianContext")));
+
+            services.AddIdentity<ApplicationUser, IdentityUser>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
